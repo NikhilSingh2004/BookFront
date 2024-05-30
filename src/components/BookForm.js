@@ -4,7 +4,7 @@ import api from '../api';
 
 const BookForm = ({ token }) => {
     const { id } = useParams();
-    const navigate = useNavigate(); // Using useNavigate instead of useHistory
+    const navigate = useNavigate();
     const [book, setBook] = useState({ title: '', author: '', description: '' });
 
     useEffect(() => {
@@ -42,25 +42,27 @@ const BookForm = ({ token }) => {
                 },
             });
         }
-        navigate('/'); // Using navigate instead of history.push
+        navigate('/');
     };
 
     return (
-        <form onSubmit={handleSubmit}>
-            <div>
-                <label>Title</label>
-                <input type="text" name="title" value={book.title} onChange={handleChange} required />
-            </div>
-            <div>
-                <label>Author</label>
-                <input type="text" name="author" value={book.author} onChange={handleChange} required />
-            </div>
-            <div>
-                <label>Description</label>
-                <textarea name="description" value={book.description} onChange={handleChange} required></textarea>
-            </div>
-            <button type="submit">{id ? 'Update' : 'Add'} Book</button>
-        </form>
+        <div className="container mt-5">
+            <form onSubmit={handleSubmit}>
+                <div className="mb-3">
+                    <label>Title</label>
+                    <input type="text" className="form-control" name="title" value={book.title} onChange={handleChange} required />
+                </div>
+                <div className="mb-3">
+                    <label>Author</label>
+                    <input type="text" className="form-control" name="author" value={book.author} onChange={handleChange} required />
+                </div>
+                <div className="mb-3">
+                    <label>Description</label>
+                    <textarea className="form-control" name="description" value={book.description} onChange={handleChange} required></textarea>
+                </div>
+                <button type="submit" className="btn btn-primary">{id ? 'Update' : 'Add'} Book</button>
+            </form>
+        </div>
     );
 };
 

@@ -19,11 +19,11 @@ const BookList = ({ token }) => {
     }, [token]);
 
     return (
-        <div>
+        <div className="mt-4">
             <h2>Your Books</h2>
-            <ul>
+            <ul className="list-group">
                 {books.map((book) => (
-                    <li key={book.id}>
+                    <li key={book.id} className="list-group-item">
                         <Link to={`/books/${book.id}`}>{book.title}</Link>
                     </li>
                 ))}

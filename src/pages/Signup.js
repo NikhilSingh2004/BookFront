@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // Importing useNavigate instead of useHistory
+import { useNavigate } from 'react-router-dom';
 import api from '../api';
 
 const Signup = () => {
-    const navigate = useNavigate(); // Using useNavigate instead of useHistory
+    const navigate = useNavigate();
     const [formData, setFormData] = useState({
         username: '',
         password: '',
@@ -20,35 +20,31 @@ const Signup = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         await api.post('/register/', formData);
-        navigate('/login'); // Using navigate instead of history.push
+        navigate('/login');
     };
 
     return (
-        <form onSubmit={handleSubmit}>
+        <div className="container mt-5">
             <h2>Sign Up</h2>
-            <div>
-                <label>Username</label>
-                <input type="text" name="username" value={formData.username} onChange={handleChange} required />
-            </div>
-            <div>
-                <label>Password</label>
-                <input type="password" name="password" value={formData.password} onChange={handleChange} required />
-            </div>
-            <div>
-                <label>Email</label>
-                <input type="email" name="email" value={formData.email} onChange={handleChange} required />
-            </div>
-            <div>
-                <label>First Name</label>
-                <input type="text" name="first_name" value={formData.first_name} onChange={handleChange} required />
-            </div>
-            <div>
-                <label>Last Name</label>
-                <input type="text" name="last_name" value={formData.last_name} onChange={handleChange} required />
-            </div>
-            <button type="submit">Sign Up</button>
-        </form>
+            <form onSubmit={handleSubmit}>
+                <div className="mb-3">
+                    <input type="text" className="form-control" name="username" value={formData.username} placeholder="Username..." onChange={handleChange} required />
+                </div>
+                <div className="mb-3">
+                    <input type="password" className="form-control" name="password" value={formData.password} placeholder="Password..." onChange={handleChange} required />
+                </div>
+                <div className="mb-3">
+                    <input type="email" className="form-control" name="email" value={formData.email} placeholder="Email..." onChange={handleChange} required />
+                </div>
+                <div className="mb-3">
+                    <input type="text" className="form-control" name="first_name" value={formData.first_name} placeholder="First Name..." onChange={handleChange} required />
+                </div>
+                <div className="mb-3">
+                    <input type="text" className="form-control" name="last_name" value={formData.last_name} placeholder="Last Name..." onChange={handleChange} required />
+                </div>
+                <button type="submit" className="btn btn-primary">Sign Up</button>
+            </form>
+        </div>
     );
 };
-
 export default Signup;

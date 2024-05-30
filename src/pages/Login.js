@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // Importing useNavigate instead of useHistory
+import { useNavigate } from 'react-router-dom';
 import api from '../api';
 
 const Login = ({ setToken }) => {
-    const navigate = useNavigate(); // Using useNavigate instead of useHistory
+    const navigate = useNavigate();
     const [formData, setFormData] = useState({
         username: '',
         password: '',
@@ -20,41 +20,28 @@ const Login = ({ setToken }) => {
         try {
             const response = await api.post('/token/', formData);
             setToken(response.data.access);
-            navigate('/'); // Using navigate instead of history.push
+            navigate('/');
         } catch (error) {
             setError('Invalid username or password');
         }
     };
 
     return (
-        <div>
+        <div className="container mt-5">
             <h2>Login</h2>
             {error && <p style={{ color: 'red' }}>{error}</p>}
             <form onSubmit={handleSubmit}>
-                <div>
-                    <label htmlFor="username">Username:</label>
-                    <input
-                        type="text"
-                        id="username"
-                        name="username"
-                        value={formData.username}
-                        onChange={handleChange}
-                    />
+                <div className="mb-3">
+                    <label htmlFor="username" className="form-label">Username:</label>
+                    <input type="text" className="form-control" id="username" name="username" value={formData.username} onChange={handleChange} />
                 </div>
-                <div>
-                    <label htmlFor="password">Password:</label>
-                    <input
-                        type="password"
-                        id="password"
-                        name="password"
-                        value={formData.password}
-                        onChange={handleChange}
-                    />
+                <div className="mb-3">
+                    <label htmlFor="password" className="form-label">Password:</label>
+                    <input type="password" className="form-control" id="password" name="password" value={formData.password} onChange={handleChange} />
                 </div>
-                <button type="submit">Login</button>
+                <button type="submit" className="btn btn-primary">Login</button>
             </form>
         </div>
     );
 };
-
 export default Login;

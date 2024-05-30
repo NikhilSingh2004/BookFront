@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom'; // Importing useNavigate instead of useHistory
+import { useParams, useNavigate } from 'react-router-dom';
 import api from '../api';
 
 const BookDetail = ({ token }) => {
     const { id } = useParams();
-    const navigate = useNavigate(); // Using useNavigate instead of useHistory
+    const navigate = useNavigate();
     const [book, setBook] = useState(null);
 
     useEffect(() => {
@@ -26,16 +26,16 @@ const BookDetail = ({ token }) => {
                 Authorization: `Bearer ${token}`,
             },
         });
-        navigate('/'); // Using navigate instead of history.push
+        navigate('/');
     };
 
     return (
         book && (
-            <div>
+            <div className="container mt-5">
                 <h2>{book.title}</h2>
                 <p>{book.description}</p>
-                <button onClick={() => navigate(`/books/${id}/edit`)}>Edit</button> {/* Using navigate instead of history.push */}
-                <button onClick={handleDelete}>Delete</button>
+                <button className="btn btn-primary me-2" onClick={() => navigate(`/books/${id}/edit`)}>Edit</button>
+                <button className="btn btn-danger" onClick={handleDelete}>Delete</button>
             </div>
         )
     );
